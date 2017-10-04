@@ -1,0 +1,7 @@
+{
+	"chapterUrls": [
+		"http://localhost:8080/data/chapter1.json",
+		"http://localhost:8080/data/chapter2.json",
+		"http://localhost:8080/data/chapter3.json"
+	]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "Simple asynch loading using promises",
+  "main": "server.js",
+  "dependencies": {
+    "connect": "^3.6.5",
+    "opn": "^5.1.0",
+    "serve-static": "^1.13.1",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node tests/promise.js",
+    "start": "node server.js"
+  },
+  "author": "Alberto Tiboni",
+  "license": "MIT"
+}
