@@ -1,3 +1,29 @@
+const wrapper = document.getElementById('story');
+
+const removeLoadingChapter = function(index) {
+    const loading = document.getElementById(`loading_${index}`);
+    wrapper.removeChild(loading);
+}
+
+const addLoadingChapter = function(index) {
+    const loading = document.createElement('div');
+    loading.id = `loading_${index}`;
+    loading.innerHTML = 'LOADING...';
+    wrapper.appendChild(loading);
+}
+
+const addChapeter = function(data, index) {
+    const chapter = document.createElement('div');
+    chapter.id = `chapter_${index}`;
+    chapter.appendChild(document.createTextNode(data.content));
+    wrapper.appendChild(chapter);
+}
+
+const outputChapter = function(chapter, index) {
+    removeLoadingChapter(index);
+    addChapeter(chapter, index);
+}
+
 const get = function(url) {
     return new Promise(function(resolve, reject) {
 
@@ -25,8 +51,6 @@ const get = function(url) {
     });
 }
 
-
-// chain of promise
 const storyUrl = `http://localhost:8080/data/story.json`;
 
 const getJSON = function(url) {
@@ -37,32 +61,6 @@ const getJSON = function(url) {
         });
 }
 
-const wrapper = document.getElementById('story');
-
-const removeLoadingChapter = function(index) {
-    const loading = document.getElementById(`loading_${index}`);
-    wrapper.removeChild(loading);
-}
-
-const addLoadingChapter = function(index) {
-    const loading = document.createElement('div');
-    loading.id = `loading_${index}`;
-    loading.innerHTML = 'LOADING...';
-    wrapper.appendChild(loading);
-}
-
-const addChapeter = function(data, index) {
-    const chapter = document.createElement('div');
-    chapter.id = `chapter_${index}`;
-    chapter.appendChild(document.createTextNode(data.content));
-    wrapper.appendChild(chapter);
-}
-
-const outputChapter = function(chapter, index) {
-    removeLoadingChapter(index);
-    addChapeter(chapter, index);
-}
-
 const start = function () {
     wrapper.innerHTML = '';
 
@@ -71,10 +69,16 @@ const start = function () {
     getJSON(storyUrl).then(function(story) {
         story.chapterUrls.forEach(function(chapterUrl, index) {
             sequence = sequence
-                .then(function(chpaterUrl) {
+                .then(function() {
                     addLoadingChapter(index);
-                    return getJSON(chapterUrl)
+                    // simulate 2 seconds loading
+                    return new Promise(function(resolve, reject) {
+                        setTimeout(function () {
+                            resolve(chapterUrl);
+                        },2000)
+                    })
                 })
+                .then(getJSON)
                 .then(function (chapter) {
                     outputChapter(chapter, index)
                 });
