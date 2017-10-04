@@ -12,7 +12,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "node tests/promise.js",
-    "start": "node server.js"
+    "start": "npm install && node server.js"
   },
   "author": "Alberto Tiboni",
   "license": "MIT"
