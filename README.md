@@ -2,4 +2,4 @@
 Simple asynch loading using promises
 
 ## Develop
-Run `npm start` your browser will poit to `https://localhost:8080`.
+Run `npm start` and point your browser to `https://localhost:8080` to run the example page.
